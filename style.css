@@ -1,0 +1,268 @@
+/* 
+  REVA 3D Speaker Experience - Pure Pitch Black Theme (#050505)
+  Clean, Minimalist Studio Backdrop with PNB Bank Integrated Payment Gateway
+*/
+
+:root {
+  --bg-dark: #050505;
+  --bg-card: #0d0d0d;
+  --brand-white: #ffffff;
+  --amber-glow: #ffb020;
+  --amber-soft: rgba(255, 176, 32, 0.2);
+  --on-surface: #ffffff;
+  --on-surface-variant: #9ca3af;
+  --glass-stroke: rgba(255, 255, 255, 0.12);
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: #050505 !important;
+}
+
+body {
+  background-color: #050505 !important;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  selection-background-color: #ffffff;
+  selection-color: #000000;
+}
+
+section {
+  background-color: #050505 !important;
+}
+
+/* ALL HEADINGS & SUBHEADINGS IN UPPERCASE */
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em;
+  font-weight: 800;
+  color: #ffffff !important;
+}
+
+/* PROMINENT NAVBAR NAVIGATION LINKS */
+.main-nav-link {
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 800 !important;
+  font-size: 0.98rem !important;
+  color: #d1d5db !important;
+  transition: all 0.25s ease;
+}
+
+.main-nav-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.8);
+}
+
+/* BODY INFORMATION & PARAGRAPHS IN NORMAL NATURAL CASE */
+p, li, label, span.info-text, .description-text {
+  text-transform: none !important;
+  letter-spacing: normal;
+}
+
+/* PURE SONY-STYLE REVA BRAND VECTOR TYPOGRAPHY (CLEAN - NO ICON) */
+.reva-sony-logo {
+  font-family: 'Times New Roman', 'Georgia', 'Bodoni MT', serif !important;
+  font-weight: 900 !important;
+  font-size: 2.3rem !important;
+  letter-spacing: 0.26em !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 0 22px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.group:hover .reva-sony-logo {
+  text-shadow: 0 0 32px rgba(255, 255, 255, 0.9);
+}
+
+/* Glassmorphic Navigation Bar - Black-Grey Theme with Spacious 96px Height */
+.glass-nav {
+  background: rgba(18, 18, 20, 0.94) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.bg-card {
+  background-color: #0d0d0d !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* PAYMENT TAB BUTTON ACTIVE STATE STYLING */
+.payment-tab-btn.active {
+  border-color: #ffb020 !important;
+  background-color: rgba(255, 176, 32, 0.12) !important;
+  color: #ffffff !important;
+}
+
+/* Cinematic Amber Studio Banner */
+.cinematic-banner-container {
+  position: relative;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 176, 32, 0.3);
+  box-shadow: 0 0 50px rgba(255, 176, 32, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cinematic-banner-img {
+  width: 100%;
+  height: 100%;
+  max-height: 600px;
+  object-fit: cover;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.cinematic-banner-container:hover .cinematic-banner-img {
+  transform: scale(1.02);
+}
+
+/* NO WOOFER PUMPING - STATIC CLEAN RENDERING */
+.cinematic-banner-img.woofer-pumping-active,
+#speakerCanvas.woofer-pumping-active,
+#wooferCanvas.woofer-pumping-active,
+.woofer-pumping-active {
+  animation: none !important;
+  transform: scale(1.0) !important;
+}
+
+.amber-pulse-ring {
+  box-shadow: 0 0 35px var(--amber-glow);
+  animation: amberPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes amberPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+/* Full Screen Hero 3D Canvas on Pitch Black Background */
+.fullscreen-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #050505 !important;
+  padding-top: 100px;
+}
+
+.hero-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+  background-color: #050505 !important;
+  transition: transform 0.2s ease;
+}
+
+#speakerCanvas, #wooferCanvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #050505 !important;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+/* Canvas Loader */
+.canvas-loader {
+  position: absolute;
+  inset: 0;
+  background: #050505;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 40;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.canvas-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 52px;
+  height: 52px;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Sound Test Wave Bar Animations */
+.wave-bar {
+  width: 4px;
+  background-color: rgba(255, 176, 32, 0.4);
+  border-radius: 999px;
+  transition: height 0.15s ease, background-color 0.3s ease;
+}
+
+.playing .wave-bar {
+  background-color: var(--amber-glow);
+  box-shadow: 0 0 10px var(--amber-glow);
+  animation: wavePulse 0.8s ease-in-out infinite alternate;
+}
+
+.playing .wave-bar:nth-child(1) { animation-delay: 0.1s; }
+.playing .wave-bar:nth-child(2) { animation-delay: 0.3s; }
+.playing .wave-bar:nth-child(3) { animation-delay: 0.5s; }
+.playing .wave-bar:nth-child(4) { animation-delay: 0.2s; }
+.playing .wave-bar:nth-child(5) { animation-delay: 0.6s; }
+.playing .wave-bar:nth-child(6) { animation-delay: 0.4s; }
+.playing .wave-bar:nth-child(7) { animation-delay: 0.1s; }
+.playing .wave-bar:nth-child(8) { animation-delay: 0.5s; }
+.playing .wave-bar:nth-child(9) { animation-delay: 0.3s; }
+.playing .wave-bar:nth-child(10) { animation-delay: 0.7s; }
+
+@keyframes wavePulse {
+  0% { transform: scaleY(0.4); }
+  100% { transform: scaleY(1.4); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
