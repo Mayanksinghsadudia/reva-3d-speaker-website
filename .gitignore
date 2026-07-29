@@ -1,0 +1,12 @@
+# Large raw video files (>100MB)
+bg_animation.mp4
+reva_woofer_explosion.mp4
+
+# Python cache & temporary files
+__pycache__/
+*.pyc
+process_bg_video.py
+
+# System & OS files
+.DS_Store
+Thumbs.db
