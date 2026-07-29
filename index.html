@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>REVA | 3D EXPLODING ACOUSTIC SPEAKER</title>
+  
+  <!-- Tailwind CSS v3 CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind Config -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: '#ffffff',
+            dark: '#050505',
+            card: '#0d0d0d',
+            amberGlow: '#ffb020',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="./style.css"/>
+</head>
+<body class="bg-dark text-white antialiased selection:bg-white selection:text-black">
+
+  <!-- Audio Element for REVA Speaker Audio Track (Silk_Stream.mp3) -->
+  <audio id="revaAudioPlayer" src="./Silk_Stream.mp3" loop preload="auto"></audio>
+
+  <!-- Spacious Black-Grey Glassmorphic Navigation Bar (h-24 / 96px height) -->
+  <header class="fixed top-0 w-full z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
+      
+      <!-- PURE SONY-STYLE REVA BRAND VECTOR TYPOGRAPHY (CLEAN - NO ICON) -->
+      <a href="#hero" class="flex items-center group">
+        <div class="flex flex-col justify-center">
+          <span class="reva-sony-logo">REVA</span>
+          <span class="font-mono text-[9px] text-amber-400 tracking-[0.38em] uppercase font-bold mt-0.5">ACOUSTIC SYSTEMS</span>
+        </div>
+      </a>
+      
+      <!-- Spacious Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-12 font-mono">
+        <a class="main-nav-link" href="#about">ABOUT US</a>
+        <a class="main-nav-link" href="#specs">PRODUCT DESCRIPTION</a>
+        <a class="main-nav-link" href="#pricing">PRICING</a>
+      </nav>
+      
+      <!-- Action Buttons in Header -->
+      <div class="flex items-center gap-5">
+        <a id="quickSoundBtn" href="#sound-test" class="bg-amber-500/10 border-2 border-amber-500/40 text-amber-300 px-6 py-3.0 rounded-full text-xs font-black uppercase tracking-wider hover:bg-amber-500/25 transition-all flex items-center gap-2.5 shadow-lg cursor-pointer">
+          <span class="material-symbols-outlined text-lg font-bold">graphic_eq</span>
+          <span>SONG TEST</span>
+        </a>
+
+        <button onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})" class="bg-white text-black px-7 py-3.0 rounded-full text-xs font-black uppercase tracking-wider hover:bg-gray-200 transition-all shadow-xl hover:scale-105 cursor-pointer">
+          BUY REVA SPEAKER
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Full Screen 3D Hero Section (Restored 3D Speaker Explode Canvas) -->
+  <section id="hero" class="fullscreen-hero relative z-10">
+    
+    <!-- Canvas Loader -->
+    <div id="canvasLoader" class="canvas-loader">
+      <div class="spinner"></div>
+      <div class="text-center space-y-2">
+        <p class="text-xs font-bold text-white tracking-widest uppercase font-mono">LOADING REVA 3D SPEAKER...</p>
+        <div class="w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
+          <div id="loaderBar" class="h-full bg-white w-0 transition-all duration-200"></div>
+        </div>
+        <p id="loaderPercent" class="font-mono text-sm text-gray-400">0%</p>
+      </div>
+    </div>
+
+    <!-- Fullscreen 3D Main Speaker Canvas -->
+    <div class="hero-canvas-container">
+      <canvas id="speakerCanvas"></canvas>
+    </div>
+
+    <!-- Click to Explode Hint -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+      <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black/80 backdrop-blur-md border border-amber-500/40 text-xs font-mono font-bold text-amber-400 uppercase tracking-widest shadow-2xl">
+        <span class="material-symbols-outlined text-sm">touch_app</span>
+        CLICK SPEAKER TO EXPLODE 3D PARTS
+      </div>
+    </div>
+
+  </section>
+
+  <!-- COMBINED REVA SPEAKER SONG TEST SECTION (#sound-test) -->
+  <section id="sound-test" class="py-24 bg-dark border-t border-white/5 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 space-y-12">
+      
+      <div class="text-center space-y-4">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs font-mono font-bold uppercase tracking-widest text-amber-400">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+          OFFICIAL REVA ACOUSTICS & SONG TEST
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black uppercase text-white tracking-tight">REVA SPEAKER SONG TEST</h2>
+        <p class="text-gray-400 text-base max-w-3xl mx-auto">
+          Experience REVA Speaker acoustics synced directly to audio song playback.
+        </p>
+      </div>
+
+      <!-- COMBINED REVA SPEAKER SHOWCASE & AUDIO PLAYER CARD -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-card rounded-3xl p-6 md:p-10 border border-amber-500/30 shadow-2xl">
+        
+        <!-- Left Column: REVA Speaker Studio Product Image Banner -->
+        <div class="lg:col-span-7 relative rounded-2xl overflow-hidden bg-black border border-white/10 min-h-[380px] md:min-h-[460px] flex items-center justify-center group cinematic-banner-container">
+          
+          <img src="./reva_cinematic_speaker.jpg" alt="REVA Speaker" class="cinematic-banner-img w-full h-[460px] object-cover rounded-2xl transition-all duration-300"/>
+          
+          <!-- Amber Glow Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+
+        </div>
+
+        <!-- Right Column: Interactive Song Control & Audio Player -->
+        <div class="lg:col-span-5 space-y-8 flex flex-col justify-between h-full py-4">
+          
+          <div class="space-y-4">
+            <h3 class="text-3xl font-black uppercase text-white tracking-tight">SONG TEST</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Clicking the button below will play audio track on REVA Speaker.
+            </p>
+          </div>
+
+          <!-- Sound Visualizer Wave Bars -->
+          <div class="bg-dark p-6 rounded-2xl border border-white/10 space-y-6">
+            <div id="soundWaveVisualizer" class="flex items-center justify-center gap-2 h-12 w-full">
+              <span class="wave-bar h-2"></span>
+              <span class="wave-bar h-5"></span>
+              <span class="wave-bar h-9"></span>
+              <span class="wave-bar h-4"></span>
+              <span class="wave-bar h-10"></span>
+              <span class="wave-bar h-6"></span>
+              <span class="wave-bar h-8"></span>
+              <span class="wave-bar h-3"></span>
+              <span class="wave-bar h-7"></span>
+              <span class="wave-bar h-2"></span>
+            </div>
+
+            <!-- Main Play Button -->
+            <button id="mainSoundPlayBtn" class="w-full bg-amber-400 text-black py-4 px-8 rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-amber-300 transition-all shadow-xl cursor-pointer">
+              <span class="material-symbols-outlined text-2xl" id="playIcon">play_arrow</span>
+              <span id="playText" class="text-sm">PLAY SONG</span>
+            </button>
+
+            <!-- Native HTML5 Controls Backup -->
+            <audio id="nativeAudioControls" src="./Silk_Stream.mp3" controls loop class="w-full rounded-lg bg-zinc-900 border border-white/10"></audio>
+
+            <!-- Status Indicator -->
+            <div class="flex items-center justify-between w-full pt-2 border-t border-white/10">
+              <span id="soundStatusText" class="font-mono text-[10px] text-gray-400 uppercase tracking-widest">READY TO PLAY</span>
+              <span class="font-mono text-[10px] text-amber-400 font-bold uppercase">SILK_STREAM.MP3</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" class="py-24 bg-dark relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-16 space-y-4">
+        <span class="text-xs font-bold text-gray-400 tracking-widest uppercase font-mono">OUR PASSION FOR SOUND</span>
+        <h2 class="text-4xl md:text-5xl font-black uppercase text-white tracking-tight">ABOUT REVA SPEAKER</h2>
+        <p class="text-gray-400 text-base max-w-2xl mx-auto">
+          REVA is designed for music lovers who demand uncompromised sound quality, ultra-deep bass, and studio-grade audio clarity.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Box 1 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 flex flex-col justify-between space-y-6">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-2xl border border-amber-500/20">
+            <span class="material-symbols-outlined text-3xl">speaker</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">ACOUSTIC EXCELLENCE</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            REVA features custom neodymium magnet drivers and handcrafted acoustic chambers that produce rich, room-filling sound with zero distortion.
+          </p>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 flex flex-col justify-between space-y-6">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-2xl border border-amber-500/20">
+            <span class="material-symbols-outlined text-3xl">graphic_eq</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">DEEP BASS & HIGHS</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Equipped with 28mm silk dome tweeters for crisp highs and low-frequency bass radiators that bring your music to life.
+          </p>
+        </div>
+
+        <!-- Box 3 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 flex flex-col justify-between space-y-6">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-2xl border border-amber-500/20">
+            <span class="material-symbols-outlined text-3xl">architecture</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">PREMIUM BUILD</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Crafted from CNC milled aluminum and acoustic resin, REVA is built to look stunning in any living room or studio.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Description Section (Dedicated 3D Woofer Explosion Viewer) -->
+  <section id="specs" class="py-24 bg-dark border-t border-white/5 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 space-y-16">
+      
+      <!-- Section Header -->
+      <div class="text-center space-y-4">
+        <span class="text-xs font-bold text-amber-400 tracking-widest uppercase font-mono">HARDWARE ANATOMY & WOOFER EXPLOSION</span>
+        <h2 class="text-4xl md:text-5xl font-black uppercase text-white tracking-tight">PRODUCT DESCRIPTION</h2>
+        <p class="text-gray-400 text-base max-w-2xl mx-auto">
+          Explore the disassembled 3D anatomical view of the REVA Woofer Speaker Assembly below. Click the woofer to explode its magnet motor, voice coil, and diaphragm.
+        </p>
+      </div>
+
+      <!-- Woofer Speaker Assembly 3D Exploded Viewer Container -->
+      <div class="relative w-full h-[550px] md:h-[650px] rounded-3xl bg-card border border-amber-500/30 p-6 overflow-hidden cursor-pointer flex items-center justify-center group shadow-2xl">
+        <canvas id="wooferCanvas" class="w-full h-full object-contain"></canvas>
+        
+        <!-- Hint -->
+        <div class="absolute top-6 right-6 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-amber-500/40 text-xs font-mono font-bold text-amber-400 uppercase tracking-widest pointer-events-none">
+          CLICK WOOFER TO EXPLODE ASSEMBLY
+        </div>
+      </div>
+
+      <!-- Woofer Specs Breakdown -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Spec 1 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 space-y-6">
+          <div class="w-14 h-14 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center font-bold text-white text-2xl">
+            <span class="material-symbols-outlined text-3xl">tune</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">NEODYMIUM MOTOR</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            High-grade N52 neodymium magnet structure generating immense magnetic flux density for instantaneous sub-bass response.
+          </p>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-mono text-amber-400">
+            <span>FLUX DENSITY</span>
+            <span class="font-bold">1.4 Tesla</span>
+          </div>
+        </div>
+
+        <!-- Spec 2 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 space-y-6">
+          <div class="w-14 h-14 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center font-bold text-white text-2xl">
+            <span class="material-symbols-outlined text-3xl">graphic_eq</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">KAPTON VOICE COIL</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            High-temperature copper voice coil wound on a lightweight Kapton former for zero thermal power compression.
+          </p>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-mono text-amber-400">
+            <span>COIL DIAMETER</span>
+            <span class="font-bold">38mm Kapton</span>
+          </div>
+        </div>
+
+        <!-- Spec 3 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 space-y-6">
+          <div class="w-14 h-14 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center font-bold text-white text-2xl">
+            <span class="material-symbols-outlined text-3xl">architecture</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">SPIDER SUSPENSION</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Concentric Nomex spider suspension delivering linear cone excursion and eliminating wobble distortion during high volume play.
+          </p>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-mono text-amber-400">
+            <span>EXCURSION</span>
+            <span class="font-bold">± 12mm Linear</span>
+          </div>
+        </div>
+
+        <!-- Spec 4 -->
+        <div class="bg-card rounded-3xl p-8 border border-white/5 space-y-6">
+          <div class="w-14 h-14 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center font-bold text-white text-2xl">
+            <span class="material-symbols-outlined text-3xl">speaker</span>
+          </div>
+          <h3 class="text-2xl font-bold uppercase text-white">ALUMINUM CONE</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Anodized aluminum diaphragm cone coupled with a durable butyl rubber surround for tight, punchy, distortion-free sub-bass down to 28Hz.
+          </p>
+          <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-mono text-amber-400">
+            <span>BASS FREQUENCY</span>
+            <span class="font-bold">28Hz - 250Hz</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-24 bg-dark border-t border-white/5 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-16 space-y-4">
+        <span class="text-xs font-bold text-gray-400 tracking-widest uppercase font-mono">PRICING TIERS</span>
+        <h2 class="text-4xl md:text-5xl font-black uppercase text-white tracking-tight">REVA SPEAKER PRICING</h2>
+        <p class="text-gray-400 text-base max-w-xl mx-auto">
+          Choose the perfect REVA speaker model for your listening environment.
+        </p>
+
+        <!-- Pricing Toggle -->
+        <div class="inline-flex items-center gap-4 bg-card p-2 rounded-full border border-white/10 mt-6">
+          <span class="text-xs text-gray-400 pl-4 font-mono uppercase">Standard</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input id="billingToggle" type="checkbox" checked class="sr-only peer">
+            <div class="w-14 h-8 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-white"></div>
+          </label>
+          <span class="text-xs text-white pr-4 flex items-center gap-2 font-mono uppercase">
+            Annual Order <span class="bg-amber-400 text-black text-[10px] px-2 py-0.5 rounded-full font-black">SAVE 20%</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Pricing Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- REVA Core -->
+        <div class="bg-card rounded-3xl p-8 border border-white/10 space-y-8 flex flex-col justify-between">
+          <div class="space-y-6">
+            <span class="text-xs text-gray-400 font-mono uppercase">COMPACT SPEAKER</span>
+            <h3 class="text-3xl font-bold uppercase text-white">REVA CORE</h3>
+            <p class="text-gray-400 text-sm">Compact 3D audio speaker for bedrooms and desk setups.</p>
+            
+            <div class="flex items-baseline gap-1">
+              <span class="text-4xl font-extrabold text-white">$</span>
+              <span class="text-5xl font-extrabold text-white price-value" data-monthly="199" data-annual="159">159</span>
+              <span class="text-gray-400 font-mono text-sm">/ unit</span>
+            </div>
+
+            <ul class="space-y-3 pt-4 border-t border-white/10 text-sm text-gray-300">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Single Neodymium Driver</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> 20 Hour Battery Life</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Bluetooth 5.3 & AirPlay 2</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> 1-Year Warranty</li>
+            </ul>
+          </div>
+
+          <button class="w-full bg-white/5 border border-white/20 py-4 rounded-full font-bold uppercase text-xs tracking-widest text-white hover:bg-white/10 transition-all cursor-pointer">
+            Order REVA Core
+          </button>
+        </div>
+
+        <!-- REVA Studio (Featured) -->
+        <div class="bg-card rounded-3xl p-8 border-2 border-amber-400 space-y-8 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-12 -top-12 bg-amber-400 text-black font-mono text-[10px] font-black py-2 px-12 rotate-45 uppercase">
+            MOST POPULAR
+          </div>
+
+          <div class="space-y-6">
+            <span class="text-xs text-amber-400 font-mono uppercase">FULL EXPLODED ENGINE</span>
+            <h3 class="text-3xl font-bold uppercase text-white">REVA STUDIO</h3>
+            <p class="text-gray-400 text-sm">Our flagship 3D exploded speaker with studio-grade sound.</p>
+            
+            <div class="flex items-baseline gap-1">
+              <span class="text-4xl font-extrabold text-white">$</span>
+              <span class="text-5xl font-extrabold text-white price-value" data-monthly="399" data-annual="319">319</span>
+              <span class="text-gray-400 font-mono text-sm">/ unit</span>
+            </div>
+
+            <ul class="space-y-3 pt-4 border-t border-white/10 text-sm text-white">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Dual Neodymium Drivers + Silk Tweeter</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Full 3D Explode Architecture</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Lossless LDAC & Wi-Fi Streaming</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> CNC Milled Aluminum Frame</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> 3-Year Express Warranty</li>
+            </ul>
+          </div>
+
+          <button class="w-full bg-amber-400 text-black py-4 rounded-full font-bold uppercase text-xs tracking-widest hover:bg-amber-300 transition-all shadow-lg cursor-pointer">
+            Order REVA Studio →
+          </button>
+        </div>
+
+        <!-- REVA Master -->
+        <div class="bg-card rounded-3xl p-8 border border-white/10 space-y-8 flex flex-col justify-between">
+          <div class="space-y-6">
+            <span class="text-xs text-gray-400 font-mono uppercase">AUDIOPHILE REFERENCE</span>
+            <h3 class="text-3xl font-bold uppercase text-white">REVA MASTER</h3>
+            <p class="text-gray-400 text-sm">Hand-calibrated reference speaker for studios and large living rooms.</p>
+            
+            <div class="flex items-baseline gap-1">
+              <span class="text-4xl font-extrabold text-white">$</span>
+              <span class="text-5xl font-extrabold text-white price-value" data-monthly="699" data-annual="559">559</span>
+              <span class="text-gray-400 font-mono text-sm">/ unit</span>
+            </div>
+
+            <ul class="space-y-3 pt-4 border-t border-white/10 text-sm text-gray-300">
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Quad Driver Array + Subwoofer</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> Custom Laser Engraved Finishes</li>
+              <li class="flex items-center gap-3"><span class="material-symbols-outlined text-amber-400">done</span> 3-Year Warranty & Express Support</li>
+            </ul>
+          </div>
+
+          <button class="w-full bg-white/5 border border-white/20 py-4 rounded-full font-bold uppercase text-xs tracking-widest text-white hover:bg-white/10 transition-all cursor-pointer">
+            Order REVA Master
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Teaser -->
+  <section class="py-20 text-center bg-dark border-t border-white/5 relative z-10">
+    <h3 class="text-3xl md:text-5xl font-black uppercase text-white tracking-tight">EXPERIENCE REVA SOUND</h3>
+    <p class="text-amber-400 text-sm font-mono tracking-widest mt-2 uppercase">STUDIO-GRADE ACOUSTIC PRECISION</p>
+  </section>
+
+  <!-- Footer featuring SONY-style REVA Logo -->
+  <footer class="py-12 border-t border-white/10 text-center text-gray-500 text-xs bg-dark relative z-10 space-y-4">
+    <div class="flex items-center justify-center">
+      <span class="reva-sony-logo">REVA</span>
+    </div>
+    <p class="font-mono">© 2026 REVA Audio Systems. All rights reserved.</p>
+  </footer>
+
+  <!-- Application Engine Script -->
+  <script src="./app.js"></script>
+</body>
+</html>
